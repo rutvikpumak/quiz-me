@@ -1,7 +1,29 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/Auth/auth-context";
 import "./Auth.css";
 
 export function SignUp() {
+  const signUp = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  };
+  const [form, setForm] = useState(signUp);
+  const { signUpUser, token } = useAuth();
+  const navigate = useNavigate();
+
+  const signUpHandler = async () => {
+    if (form.firstName !== "" && form.lastName !== "" && form.email !== "" && form.password !== "")
+      await signUpUser(`${form.firstName} ${form.lastName}`, form.email, form.password);
+    setForm(signUp);
+  };
+  if (token) {
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
+  }
   return (
     <div className="auth-container flex-center">
       <div className="auth-main-container flex-center">
@@ -12,29 +34,53 @@ export function SignUp() {
           <div className="sign-up-wrapper">
             <div className="auth-firstname">
               <label htmlFor="firstname">First Name</label>
-              <input placeholder="Test" className="text-input" type="text" />
+              <input
+                placeholder="Test"
+                className="text-input"
+                type="text"
+                value={form.firstName}
+                onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                required
+              />
             </div>
             <div className="auth-lastname">
               <label htmlFor="lastname">Last Name</label>
-              <input placeholder="Admin" className="text-input" type="text" />
+              <input
+                placeholder="Admin"
+                className="text-input"
+                type="text"
+                value={form.lastName}
+                onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                required
+              />
             </div>
           </div>
           <div className="auth-email">
             <label htmlFor="mail">Email Address</label>
-            <input placeholder="test@gmail.com" className="text-input" type="text" />
+            <input
+              placeholder="test@gmail.com"
+              className="text-input"
+              type="text"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
+            />
           </div>
           <div className="auth-pwd">
             <label htmlFor="pwd">Password</label>
-            <input placeholder="***********" className="pwd-input" type="password" />
-          </div>
-          <div className="auth-checkbox">
-            <label className="select-input">
-              <input type="checkbox" name="light" className="checkbox-input" value="" />
-              <span className="text">I accept all Terms & Conditions</span>
-            </label>
+            <input
+              placeholder="***********"
+              className="pwd-input"
+              type="password"
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              required
+            />
           </div>
           <div className="primary-btn text-center">
-            <button className="link-btn">Create New Account</button>
+            <button className="link-btn" onClick={signUpHandler}>
+              Create New Account
+            </button>
           </div>
           <div className="auth-secondary-btn text-center">
             <Link to="/sign-in">
