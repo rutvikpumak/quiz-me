@@ -2,12 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Auth.css";
 import { useAuth } from "../../context/Auth/auth-context";
-import firebase from "firebase/compat/app";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loginUser, token, user } = useAuth();
+  const { loginUser, token } = useAuth();
   const navigate = useNavigate();
 
   const loginWithTestHandler = () => {
