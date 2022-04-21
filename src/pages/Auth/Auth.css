@@ -89,8 +89,8 @@
     width: 100%;
 }
 
-.frgt-pwd-btn {
-    text-decoration: underline;
+.primary-btn{
+    margin-top: 1rem;
 }
 
 @media screen and (max-width:550px) {
