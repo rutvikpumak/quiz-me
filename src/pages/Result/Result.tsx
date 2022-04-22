@@ -26,7 +26,7 @@ export function Result() {
       setTotalScore(total);
       addScoreToUser(total);
     }
-  }, []);
+  }, [questionData, selectedQuestions]);
 
   return selectedQuestions.length === 0 ? (
     <Navigate to="/" />
