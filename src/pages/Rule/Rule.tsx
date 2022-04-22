@@ -10,16 +10,15 @@ export function Rule() {
         </div>
         <div className="rule-main">
           <p>
-            <i className="fa fa-star" aria-hidden="true"></i>
-            Each right answer scores 10 Points.
+            <i className="fa fa-star" aria-hidden="true"></i> Each right answer scores 10 Points.
           </p>
           <p>
-            <i className="fa fa-star" aria-hidden="true"></i>
-            Each multiple choice question has only one correct answer.
+            <i className="fa fa-star" aria-hidden="true"></i> Each multiple choice question has only
+            one correct answer.
           </p>
           <p>
-            <i className="fa fa-star" aria-hidden="true"></i>
-            To win the quiz you need to score more than 80%.
+            <i className="fa fa-star" aria-hidden="true"></i> To win the quiz you need to score more
+            than 80%.
           </p>
         </div>
         <div className="flex-center">

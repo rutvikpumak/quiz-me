@@ -1,7 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useQuiz } from "../../context/Quiz/quiz-context";
+import { quizData } from "../Question/quiz.model";
 import "./Home.css";
 
 export function Home() {
+  const navigate = useNavigate();
+  const { dispatch } = useQuiz();
+  const playHandler = (id: string) => {
+    navigate("/rules");
+    sessionStorage.setItem("quizId", id);
+  };
+
+  useEffect(() => {
+    dispatch({ type: "RESET" });
+    sessionStorage.removeItem("quizId");
+  }, [dispatch]);
+
   return (
     <>
       <div className="quiz-home-container">
@@ -10,7 +25,6 @@ export function Home() {
             <h1>Bored ?</h1>
             <h1>Want to have some fun ?</h1>
             <h1>Do you think you are bollywood movie fan ?</h1>
-
             <a href="#explore" className="link-btn">
               Explore Quiz
             </a>
@@ -27,53 +41,35 @@ export function Home() {
         <div className="category-home-container flex-center">
           <div className="category">
             <header className="category-header">Category</header>
-
             <main className="category-main" id="explore">
-              <div className="card text-overlay">
-                <div className="img-content">
-                  <img
-                    className="card-img"
-                    src="https://stat2.bollywoodhungama.in/wp-content/uploads/2020/12/Are-you-Chatur-Enough-To-Pass-This-Ultimate-3-idiots-Quiz.jpg"
-                    alt="3 idiots"
-                  />
-                </div>
-                <div className="card-info">
-                  <h3>Are you Chathur enough to pass '3 idiots' quiz ?</h3>
-                  <p className="paragraph-sm">
-                    <i className="fa fa-tag" aria-hidden="true"></i>
-                    Take this quiz to test yourself.
-                  </p>
-                  <p className="paragraph-sm">
-                    <i className="fa fa-tag" aria-hidden="true"></i>5 Questions
-                  </p>
-                  <NavLink to="/rules">
-                    <div className="link-btn take-quiz-btn">Play Now</div>
-                  </NavLink>
-                </div>
-              </div>
-
-              <div className="card text-overlay">
-                <div className="img-content">
-                  <img
-                    className="card-img"
-                    src="https://im.idiva.com/content/2020/Jul/Toughest-Sholay-Quiz-For-All-Jai-Veeru-And-Gabbar-Fans_THUMB_5f06b1f0759e9.jpg"
-                    alt=""
-                  />
-                </div>
-                <div className="card-info">
-                  <h3>Are you Jai-Veeru And Gabbar Fans ?</h3>
-                  <p className="paragraph-sm">
-                    <i className="fa fa-tag" aria-hidden="true"></i>
-                    Take this quiz to test yourself.
-                  </p>
-                  <p className="paragraph-sm">
-                    <i className="fa fa-tag" aria-hidden="true"></i>5 Questions
-                  </p>
-                  <NavLink to="/rules">
-                    <div className="link-btn take-quiz-btn">Play Now</div>
-                  </NavLink>
-                </div>
-              </div>
+              {quizData.map((quiz) => {
+                return (
+                  <div key={quiz.id} className="card text-overlay">
+                    <div className="img-content">
+                      <img className="card-img" src={quiz.img} alt={quiz.category} />
+                    </div>
+                    <div className="card-info">
+                      <h3>{quiz.category}</h3>
+                      <div className="card-info-bottom">
+                        <p className="paragraph-sm">
+                          <i className="fa fa-tag" aria-hidden="true"></i> Take this quiz to test
+                          yourself.
+                        </p>
+                        <p className="paragraph-sm">
+                          <i className="fa fa-tag" aria-hidden="true"></i> {quiz.questions.length}{" "}
+                          Questions
+                        </p>
+                        <div
+                          className="link-btn take-quiz-btn"
+                          onClick={() => playHandler(`${quiz.id}`)}
+                        >
+                          Play Now
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </main>
           </div>
         </div>

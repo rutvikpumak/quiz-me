@@ -10,9 +10,9 @@ import { collection, db, getDocs, query, where } from "../../firebase";
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const localStorageToken = JSON.parse(localStorage.getItem("token") || "{}");
+  const localStorageToken = localStorage.getItem("token");
   const [token, setToken] = useState(localStorageToken);
-  const localStorageUser = JSON.parse(localStorage.getItem("user") || "{}");
+  const localStorageUser = localStorage.getItem("user");
   const [user, setUser] = useState(localStorageUser);
   const [userInfo, setUserInfo] = useState({ name: "", email: "" });
 

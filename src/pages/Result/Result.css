@@ -21,6 +21,7 @@
 .rslt-pg-header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
 .rslt-pg-main {
@@ -33,22 +34,15 @@
 .rslt-option {
     background-color:var(--md-blue);
     border-radius: 20px;
-    padding: 12px 10px 12px 50px;
+    padding: 12px 10px 12px 20px;
     margin-bottom: 1px;
-    cursor: pointer;
-    user-select: none;
-}
-
-.rslt-option input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
 }
 
 .score-msg{
     margin-left: 0.5rem;
     letter-spacing: 1px;
 }
+
 .right-ans{
     background-color: var(--success);
 }
@@ -59,6 +53,11 @@
 
 .rslt-title{
     color:var(--link)
+}
+
+.not-selected-text{
+    color:orange;
+    font-weight: bold;
 }
 
 @media screen and (max-width:550px) {
