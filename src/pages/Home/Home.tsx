@@ -15,7 +15,7 @@ export function Home() {
   useEffect(() => {
     dispatch({ type: "RESET" });
     sessionStorage.removeItem("quizId");
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
