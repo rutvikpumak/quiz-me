@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import { Navbar, PrivateRoute } from "./component";
-import { Home, Question, Result, Rule, SignIn, SignUp, UserProfile } from "./pages";
+import { Dashboard, Home, Question, Result, Rule, SignIn, SignUp, UserProfile } from "./pages";
 import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
@@ -22,6 +22,17 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="/rules"
           element={
@@ -30,8 +41,6 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
         <Route
           path="/question"
           element={
