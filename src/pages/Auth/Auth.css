@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.7rem;
+    gap: 1.5rem;
     font-size: 0.8rem;
 }
 
@@ -73,7 +73,6 @@
 
 .auth-main .link-btn {
     width: 100%;
-    margin-bottom: 1rem;
 }
 
 .auth-secondary-btn {
@@ -89,9 +88,6 @@
     width: 100%;
 }
 
-.primary-btn{
-    margin-top: 1rem;
-}
 
 @media screen and (max-width:550px) {
     .auth-main-container {

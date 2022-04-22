@@ -1,75 +1,77 @@
+import { Navigate } from "react-router-dom";
+import { useQuiz } from "../../context/Quiz/quiz-context";
+import { Option, QuestionType } from "../../types/question.types";
+import { quizData } from "../Question/quiz.model";
 import "./Result.css";
 
 export function Result() {
-  return (
+  const quizId = sessionStorage.getItem("quizId");
+  const questionData: any = quizData.find((quizObj) => quizObj.id === quizId)?.questions;
+  const {
+    state: { selectedQuestions },
+  } = useQuiz();
+
+  let totalScore = 0;
+  let totalPercentage = 0;
+  if (selectedQuestions.length !== 0) {
+    questionData.forEach((value: any, index: number) => {
+      for (const option of questionData[index].options) {
+        if (selectedQuestions[index].value === option.value && option.isRight)
+          totalScore += questionData[index].points;
+      }
+    });
+    totalPercentage = (totalScore / (questionData.length * 10)) * 100;
+  }
+
+  return selectedQuestions.length === 0 ? (
+    <Navigate to="/" />
+  ) : (
     <div className="rsltcontainer flex-center">
       <h1 className="rslt-title">Quiz Result</h1>
       <div className="rslt-header-container flex-center">
-        <h2 className="result-msg">Oops 😭, Better Luck Next Time !</h2>
+        {totalPercentage < 80 ? (
+          <h2 className="result-msg">Oops 😭, Better Luck Next Time !</h2>
+        ) : (
+          <h2 className="result-msg">Congratulations , You have cleared the quiz ! </h2>
+        )}
         <div className="flex-center">
           <h3>Your Score is : </h3>
-          <h3 className="score-msg">10/50</h3>
+          <h3 className="score-msg">
+            {totalScore}/{questionData.length * 10}
+          </h3>
         </div>
       </div>
 
       <div className="rslt-que-main-container">
-        <div className="rslt-que-container">
-          <div className="rslt-pg-header">
-            <p className="paragraph-md">Question: 1</p>
-            <p className="paragraph-md">Score: 10</p>
-          </div>
-
-          <div className="rslt-pg-question">
-            <h2>What was the name of the college where Rancho and Chatur studied?</h2>
-          </div>
-
-          <div className="rslt-pg-main">
-            <div className="rslt-option" id="div1">
-              Imperial College of Engineering
+        {questionData.map((question: QuestionType, index: number) => (
+          <div className="rslt-que-container">
+            <div className="rslt-pg-header">
+              <p className="paragraph-md">Question: {index + 1}</p>
+              {selectedQuestions[index].value === "" && (
+                <p className="paragraph-md not-selected-text">Option Not Selected</p>
+              )}
             </div>
 
-            <div className="rslt-option" id="div2">
-              Indian College of Engineering
+            <div className="rslt-pg-question">
+              <h3>{question.question}</h3>
             </div>
-
-            <div className="rslt-option" id="div3">
-              Indian Institutes of Technology
-            </div>
-
-            <div className="rslt-option" id="div4">
-              Imperial Centre of Engineering
-            </div>
-          </div>
-        </div>
-
-        <div className="rslt-que-container">
-          <div className="rslt-pg-header">
-            <p className="paragraph-md">Question: 2</p>
-            <p className="paragraph-md">Score: 0</p>
-          </div>
-
-          <div className="rslt-pg-question">
-            <h2>What Is The Name Of Thakur's Grandson ?</h2>
-          </div>
-
-          <div className="rslt-pg-main">
-            <div className="rslt-option" id="div1">
-              Deepak
-            </div>
-
-            <div className="rslt-option" id="div2">
-              Devrat
-            </div>
-
-            <div className="rslt-option" id="div3">
-              Munna
-            </div>
-
-            <div className="rslt-option" id="div4">
-              Deep
+            <div className="rslt-pg-main">
+              {question.options.map((option: Option) => {
+                return (
+                  <div
+                    className={`rslt-option ${option.isRight && "right-ans"} ${
+                      selectedQuestions[index].value === option.value &&
+                      !option.isRight &&
+                      "wrong-ans"
+                    }`}
+                  >
+                    <p>{option.value}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

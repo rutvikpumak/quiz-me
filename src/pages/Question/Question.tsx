@@ -1,56 +1,90 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useQuiz } from "../../context/Quiz/quiz-context";
+import { Option } from "../../types/question.types";
 import "./Question.css";
+import { quizData } from "./quiz.model";
 
 export function Question() {
+  const navigate = useNavigate();
+  const quizId = sessionStorage.getItem("quizId");
+  const questions: any = quizData.find((quizObj) => quizObj.id === quizId)?.questions;
+  const [selectedOption, setSelectedOption] = useState("");
+  const {
+    state: { currentQue },
+    dispatch,
+  } = useQuiz();
+
+  const optionClickHandler = (option: Option): void => {
+    setSelectedOption(option.value);
+  };
+
+  const nextClickHandler = (): void => {
+    dispatch({
+      type: "NEXT_QUE",
+      payload: {
+        question: questions[currentQue - 1].question,
+        value: selectedOption,
+      },
+    });
+    setSelectedOption("");
+  };
+
+  const quitHandler = () => {
+    sessionStorage.removeItem("quizId");
+    navigate("/");
+  };
+
   return (
     <div className="quizcontainer flex-center">
       <div className="quiz-main-container">
         <div className="quiz-pg-header">
-          <p className="paragraph-rg">Question: 1/5</p>
+          <p className="paragraph-rg">
+            Question: {currentQue}/{questions?.length}
+          </p>
           <i className="fa fa-clock-o timer" aria-hidden="true">
             03:00
           </i>
         </div>
 
         <div className="quiz-pg-question">
-          <h1 className="paragraph-lg">
-            What was the name of the college where Rancho and Chatur studied?
-          </h1>
+          <h2> {questions[currentQue - 1].question}</h2>
         </div>
 
         <div className="quiz-pg-main">
-          <label className="quiz-option" id="label1">
-            {" "}
-            Imperial College of Engineering
-            <input type="radio" name="quiz" id="" value="" />
-          </label>
-
-          <label className="quiz-option" id="label2">
-            {" "}
-            Indian College of Engineering
-            <input type="radio" name="quiz" id="" value="" />
-          </label>
-
-          <label className="quiz-option" id="label3">
-            {" "}
-            Indian Institutes of Technology
-            <input type="radio" name="quiz" id="" value="" />
-          </label>
-
-          <label className="quiz-option" id="label3">
-            {" "}
-            Imperial Centre of Engineering
-            <input type="radio" name="quiz" id="" value="" />
-          </label>
+          {questions[currentQue - 1].options.map((option: Option) => (
+            <label
+              key={option.value}
+              className={`quiz-option ${
+                selectedOption === option.value ? "option-select" : "quiz-option"
+              }`}
+              onClick={() => optionClickHandler(option)}
+            >
+              {option.value}
+            </label>
+          ))}
         </div>
 
         <div className="quiz-pg-footer">
-          <button className="btn danger">Quit</button>
-          <Link to="/result">
-            <button className="link-btn next-que-btn">
+          <button className="btn danger" onClick={() => quitHandler()}>
+            Quit
+          </button>
+          {questions?.length === currentQue ? (
+            <button
+              className={`link-btn next-que-btn ${selectedOption === "" ? "btn-disable" : ""}`}
+              onClick={() => {
+                nextClickHandler();
+                navigate("/result");
+              }}
+              disabled={selectedOption === "" ? true : false}
+            >
+              View Result
+            </button>
+          ) : (
+            <button className="link-btn next-que-btn" onClick={() => nextClickHandler()}>
               Next <i className="fa fa-arrow-right" aria-hidden="true"></i>
             </button>
-          </Link>
+          )}
         </div>
       </div>
     </div>

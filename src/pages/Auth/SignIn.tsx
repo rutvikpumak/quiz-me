@@ -57,16 +57,6 @@ export function SignIn() {
             />
           </div>
 
-          <div className="auth-checkbox">
-            <label className="select-input">
-              <input type="checkbox" name="light" className="checkbox-input" value="" />
-              <span className="text">Remember Me</span>
-            </label>
-            {/* <a href="./forget-pwd.html" className="frgt-pwd-btn">
-              Forgot your Password?
-            </a> */}
-          </div>
-
           <div className="primary-btn text-center">
             <button className="link-btn" onClick={loginHandler}>
               Login

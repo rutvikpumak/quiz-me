@@ -19,7 +19,6 @@
     text-align: left;
 }
 
-
 .category {
     margin: 2rem 0;
 }
@@ -50,9 +49,15 @@
     line-height: 2rem;
 }
 
+.card-info-bottom {
+    position: absolute;
+    bottom: 20px;
+    width: 89%;
+}
+
 .card-info h3 {
+    line-height: 1.5rem;
     margin-bottom: 0.5rem;
-    line-height: 1.3rem;
 }
 
 .text-overlay .card-img,
@@ -68,6 +73,8 @@
 
 .text-overlay {
     width: 17rem;
+    position: relative;
+    height: 28rem;
 }
 
 .card-img {
@@ -123,6 +130,9 @@
         font-size: 1.5rem;
     }
 
+    .text-overlay{
+        height: 25rem;
+    }
     .card-info {
         line-height: 1.5rem;
     }
