@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../../context/Quiz/quiz-context";
 import { Option } from "../../types/question.types";
@@ -10,6 +10,7 @@ export function Question() {
   const quizId = sessionStorage.getItem("quizId");
   const questions: any = quizData.find((quizObj) => quizObj.id === quizId)?.questions;
   const [selectedOption, setSelectedOption] = useState("");
+  const [seconds, setSeconds] = useState(30);
   const {
     state: { currentQue },
     dispatch,
@@ -18,8 +19,9 @@ export function Question() {
   const optionClickHandler = (option: Option): void => {
     setSelectedOption(option.value);
   };
-
   const nextClickHandler = (): void => {
+    setSeconds(30);
+
     dispatch({
       type: "NEXT_QUE",
       payload: {
@@ -29,11 +31,27 @@ export function Question() {
     });
     setSelectedOption("");
   };
-
   const quitHandler = () => {
     sessionStorage.removeItem("quizId");
     navigate("/");
   };
+
+  useEffect(() => {
+    let intervalId = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+      if (seconds === 0) {
+        nextClickHandler();
+        if (currentQue === questions.length) {
+          navigate("/result");
+        }
+      }
+    }, 1000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  });
 
   return (
     <div className="quizcontainer flex-center">
@@ -42,9 +60,11 @@ export function Question() {
           <p className="paragraph-rg">
             Question: {currentQue}/{questions?.length}
           </p>
-          <i className="fa fa-clock-o timer" aria-hidden="true">
-            03:00
-          </i>
+          <div className={`${seconds < 11 && "text-red"}`}>
+            <i className="fa-regular fa-clock timer"></i>
+            {"  "}
+            <span className={`timer paragraph-rg `}>{seconds} Sec</span>
+          </div>
         </div>
 
         <div className="quiz-pg-question">
