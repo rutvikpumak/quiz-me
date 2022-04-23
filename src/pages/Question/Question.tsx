@@ -20,6 +20,8 @@ export function Question() {
     setSelectedOption(option.value);
   };
   const nextClickHandler = (): void => {
+    setSeconds(30);
+
     dispatch({
       type: "NEXT_QUE",
       payload: {
@@ -44,7 +46,6 @@ export function Question() {
         if (currentQue === questions.length) {
           navigate("/result");
         }
-        setSeconds(30);
       }
     }, 1000);
     return () => {
