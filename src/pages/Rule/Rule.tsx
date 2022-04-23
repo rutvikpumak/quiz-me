@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 import "./Rule.css";
 
+const RULES = [
+  "You will get 30 seconds to select an option for each question.",
+  "Otherwise that question will be skipped and point won't be considered.",
+  "Each right answer scores 10 Points.",
+  "Each multiple choice question has only one correct answer.",
+  "To win the quiz you need to score more than 80%.",
+];
 export function Rule() {
   return (
     <div className="rule-container flex-center">
@@ -9,17 +16,11 @@ export function Rule() {
           <h1>Rules</h1>
         </div>
         <div className="rule-main">
-          <p>
-            <i className="fa fa-star" aria-hidden="true"></i> Each right answer scores 10 Points.
-          </p>
-          <p>
-            <i className="fa fa-star" aria-hidden="true"></i> Each multiple choice question has only
-            one correct answer.
-          </p>
-          <p>
-            <i className="fa fa-star" aria-hidden="true"></i> To win the quiz you need to score more
-            than 80%.
-          </p>
+          {RULES.map((rule) => (
+            <p>
+              <i className="fa fa-star" aria-hidden="true"></i> {rule}
+            </p>
+          ))}
         </div>
         <div className="flex-center">
           <Link to="/question">
