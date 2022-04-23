@@ -14,20 +14,20 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState(localStorageToken);
   const localStorageUser = localStorage.getItem("user");
   const [user, setUser] = useState(localStorageUser);
-  const [userInfo, setUserInfo] = useState({ name: "", email: "" });
+  const [userInfo, setUserInfo] = useState({ name: "", email: "", scores: [] });
 
   useEffect(() => {
     if (token && user) {
       (async () => {
         const q = query(collection(db, "users"), where("uid", "==", user));
-        const querySnapshot1 = await getDocs(q);
-        querySnapshot1.forEach((doc) => {
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
           const userObj: any = doc.data();
           setUserInfo(userObj);
         });
       })();
     }
-  }, [token, user]);
+  }, [token, user, userInfo]);
 
   const loginUser = async (email: string, password: string) => {
     if (email && password !== "") {
@@ -35,8 +35,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const authRes = await logInWithEmailAndPassword(email, password);
         const user: any = authRes?.user;
         if (user) {
-          localStorage.setItem("token", JSON.stringify(user.accessToken));
-          localStorage.setItem("user", JSON.stringify(user.uid));
+          localStorage.setItem("token", user.accessToken);
+          localStorage.setItem("user", user.uid);
           setToken(user.accessToken);
           setUser(user.uid);
           toast.success(`Logged In Successfully!`);
@@ -57,8 +57,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const authRes = await registerWithEmailAndPassword(name, email, password);
       const user: any = authRes?.user;
       if (user) {
-        localStorage.setItem("token", JSON.stringify(user.accessToken));
-        localStorage.setItem("user", JSON.stringify(user.uid));
+        localStorage.setItem("token", user.accessToken);
+        localStorage.setItem("user", user.uid);
         setToken(user.accessToken);
         setUser(user.uid);
         toast.success(`Account Created Successfully!`);

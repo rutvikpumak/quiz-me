@@ -18,3 +18,13 @@
 .nav-title {
     color: var(--link);
 }
+
+.navbar-right h5{
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.navbar-right h5:hover{
+   color:var(--link);
+   border-bottom:1px solid var(--link)
+}

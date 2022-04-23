@@ -4,7 +4,7 @@ import { logout } from "../../services/auth-service";
 import "./UserProfile.css";
 
 export function UserProfile() {
-  const { setToken, setUser, userInfo } = useAuth();
+  const { setToken, setUser, userInfo, setUserInfo } = useAuth();
   const navigate = useNavigate();
 
   const logOutHandler = () => {
@@ -12,11 +12,12 @@ export function UserProfile() {
     localStorage.removeItem("user");
     setToken("");
     setUser("");
+    setUserInfo("");
     logout();
     navigate("/");
   };
 
-  return (
+  return userInfo.name ? (
     <div className="profile-container">
       <div className="profile-main-container">
         <h1>Account</h1>
@@ -49,5 +50,7 @@ export function UserProfile() {
         </div>
       </div>
     </div>
+  ) : (
+    <></>
   );
 }
