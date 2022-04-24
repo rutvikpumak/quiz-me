@@ -3,7 +3,7 @@ import { useAuth } from "../../context/Auth/auth-context";
 import { useEffect, useState } from "react";
 import { useQuiz } from "../../context/Quiz/quiz-context";
 import { useNavigate } from "react-router-dom";
-import { collection, db, getDocs, query, where } from "../../firebase";
+import { collection, db, getDocs } from "../../firebase";
 
 export function Dashboard() {
   const { userInfo } = useAuth();
