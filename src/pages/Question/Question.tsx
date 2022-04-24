@@ -21,7 +21,6 @@ export function Question() {
   };
   const nextClickHandler = (): void => {
     setSeconds(30);
-
     dispatch({
       type: "NEXT_QUE",
       payload: {
@@ -51,7 +50,8 @@ export function Question() {
     return () => {
       clearInterval(intervalId);
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seconds]);
 
   return (
     <div className="quizcontainer flex-center">
