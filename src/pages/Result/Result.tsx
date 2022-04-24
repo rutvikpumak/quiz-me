@@ -13,12 +13,10 @@ export function Result() {
   const questionData: any = quizData.find((quizObj) => quizObj.id === quizId)?.questions;
   const {
     state: { selectedQuestions },
-    setLoader,
   } = useQuiz();
   const { userInfo } = useAuth();
 
   if (selectedQuestions.length !== 0) {
-    setLoader(true);
     let total = 0;
     questionData.forEach((value: any, index: number) => {
       for (const option of questionData[index].options) {
@@ -27,7 +25,6 @@ export function Result() {
       }
     });
     totalScore.current = total;
-    setTimeout(() => setLoader(false), 1000);
 
     addScoreToUser(total, userInfo);
   }
