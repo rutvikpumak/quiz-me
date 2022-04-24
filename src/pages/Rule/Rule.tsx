@@ -9,6 +9,7 @@ const RULES = [
   "To win the quiz you need to score more than 80%.",
 ];
 export function Rule() {
+  const quizId = sessionStorage.getItem("quizId");
   return (
     <div className="rule-container flex-center">
       <div className="rule-main-container flex-center">
@@ -23,7 +24,7 @@ export function Rule() {
           ))}
         </div>
         <div className="flex-center">
-          <Link to="/question">
+          <Link to={`/question/${quizId}`}>
             <button className="link-btn start-quiz-btn">Start Quiz</button>
           </Link>
         </div>

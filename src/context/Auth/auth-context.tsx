@@ -27,7 +27,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         });
       })();
     }
-  }, [token, user, userInfo]);
+  }, [token, user]);
 
   const loginUser = async (email: string, password: string) => {
     if (email && password !== "") {

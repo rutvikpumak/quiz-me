@@ -1,39 +1,36 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { addDoc, doc, updateDoc } from "firebase/firestore";
 import { collection, db, getDocs } from "../firebase";
 import { quizData } from "../pages/Question/quiz.model";
 
-export const addScoreToUser = async (scoreValue: number) => {
+export const addScoreToUser = async (scoreValue: number, userInfo: any) => {
   const quizId = sessionStorage.getItem("quizId");
   const quizCategory = quizData.find((quizObj) => quizObj.id === quizId)?.category;
-  const uid: any = localStorage.getItem("user")
-  const userRef = collection(db, "users");
-  const data = await getDocs(userRef);
-  let userData: any;
-  let isExist: boolean = false;
-  let scoreData = [];
-  let userDocId: string = ""
+  const scoreRef = collection(db, "scoreboard");
+  const scoreData = await getDocs(scoreRef);
+  let leaderData: any = {}
 
-  data.docs.forEach((doc) => {
-    if ((doc.data()).uid.toString() === uid) {
-      userData = doc.data();
-      userDocId = doc.id
+  scoreData.docs.forEach((doc) => {
+    const { quizId: QuizID, email } = doc.data()
+    if (QuizID.toString() === quizId && userInfo.email === email.toString()) {
+      leaderData = {
+        docId: doc.id,
+        data: doc.data()
+      }
     }
   });
 
-  if (userData.scores.length > 0)
-    scoreData = userData.scores.map((ele: any) => {
-      if (ele.quizId === quizId) {
-        isExist = true;
-        return { ...ele, score: scoreValue }
-      } else { return ele }
-    })
-
-  if (!isExist) {
-    scoreData = [...scoreData, { quizId: quizId, quizCategory: quizCategory, score: scoreValue }]
+  if (leaderData?.docId) {
+    const leaderRef = doc(db, "scoreboard", leaderData?.docId);
+    await updateDoc(leaderRef, {
+      score: scoreValue
+    });
+  } else {
+    await addDoc(collection(db, "scoreboard"), {
+      username: userInfo.name,
+      email: userInfo.email,
+      quizId: quizId,
+      quizCategory: quizCategory,
+      score: scoreValue
+    });
   }
-
-  const getUser = doc(db, "users", userDocId);
-  await updateDoc(getUser, {
-    scores: [...scoreData]
-  })
 };
