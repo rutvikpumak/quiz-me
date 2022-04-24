@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/Auth/auth-context";
 import { useQuiz } from "../../context/Quiz/quiz-context";
@@ -9,17 +9,17 @@ import "./Result.css";
 
 export function Result() {
   const quizId = sessionStorage.getItem("quizId");
-  // const [totalScore, setTotalScore] = useState(0);
   const totalScore = useRef(0);
   const questionData: any = quizData.find((quizObj) => quizObj.id === quizId)?.questions;
   const {
     state: { selectedQuestions },
+    setLoader,
+    loader,
   } = useQuiz();
   const { userInfo } = useAuth();
 
-  console.log("useEffect Run");
-
   if (selectedQuestions.length !== 0) {
+    setLoader(true);
     let total = 0;
     questionData.forEach((value: any, index: number) => {
       for (const option of questionData[index].options) {
@@ -28,6 +28,8 @@ export function Result() {
       }
     });
     totalScore.current = total;
+    setTimeout(() => setLoader(false), 1000);
+
     addScoreToUser(total, userInfo);
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -2,17 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Auth.css";
 import { useAuth } from "../../context/Auth/auth-context";
+import { useQuiz } from "../../context/Quiz/quiz-context";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { loginUser, token } = useAuth();
+  const { setLoader } = useQuiz();
   const navigate = useNavigate();
-
-  const loginWithTestHandler = () => {
-    setEmail("admin@test.com");
-    setPassword("test123");
-  };
 
   const loginHandler = async () => {
     if (email !== "" && password !== "") {
@@ -22,10 +19,17 @@ export function SignIn() {
     setPassword("");
   };
 
+  const loginWithTestHandler = () => {
+    setEmail("admin@test.com");
+    setPassword("test123");
+  };
+
   if (token) {
+    setLoader(true);
     setTimeout(() => {
+      setLoader(false);
       navigate("/");
-    }, 500);
+    }, 1000);
   }
 
   return (

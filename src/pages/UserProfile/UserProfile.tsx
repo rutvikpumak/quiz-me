@@ -1,19 +1,25 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../../context/Auth/auth-context";
+import { useQuiz } from "../../context/Quiz/quiz-context";
 import { logout } from "../../services/auth-service";
 import "./UserProfile.css";
 
 export function UserProfile() {
   const { setToken, setUser, userInfo, setUserInfo } = useAuth();
   const navigate = useNavigate();
+  const { setLoader } = useQuiz();
 
   const logOutHandler = () => {
+    setLoader(true);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setToken("");
     setUser("");
     setUserInfo("");
     logout();
+    setTimeout(() => setLoader(false), 1000);
+    toast.success(`Logged Out Successfully!`);
     navigate("/");
   };
 

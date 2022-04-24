@@ -7,10 +7,11 @@ import { collection, db, getDocs } from "../../firebase";
 
 export function Dashboard() {
   const { userInfo } = useAuth();
-  const { dispatch } = useQuiz();
+  const { dispatch, setLoader } = useQuiz();
   const navigate = useNavigate();
   const [leaderData, setLeaderData] = useState([]);
   useEffect(() => {
+    setLoader(true);
     dispatch({ type: "RESET" });
     sessionStorage.removeItem("quizId");
     (async () => {
@@ -22,6 +23,7 @@ export function Dashboard() {
       });
       setLeaderData(data);
     })();
+    setTimeout(() => setLoader(false), 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const progressData = leaderData.filter((ele: any) => ele?.email === userInfo.email);

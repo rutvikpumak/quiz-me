@@ -17,5 +17,7 @@ type Dispatch = (action: Action) => void;
 
 export type QuizContextType = {
     state: QuizState,
-    dispatch: Dispatch
+    dispatch: Dispatch,
+    loader: boolean;
+    setLoader: (value: boolean) => void;
 }
