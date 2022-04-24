@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/Auth/auth-context";
 import { useQuiz } from "../../context/Quiz/quiz-context";
@@ -14,7 +14,6 @@ export function Result() {
   const {
     state: { selectedQuestions },
     setLoader,
-    loader,
   } = useQuiz();
   const { userInfo } = useAuth();
 
