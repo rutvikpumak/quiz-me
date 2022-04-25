@@ -44,6 +44,10 @@
     margin-top: 3rem;
 }
 
+.card:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 .card-info {
     padding: 1rem;
     line-height: 2rem;
