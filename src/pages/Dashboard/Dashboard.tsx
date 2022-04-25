@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { collection, db, getDocs } from "../../firebase";
 
 export function Dashboard() {
-  const { userInfo, token } = useAuth();
+  const { userInfo } = useAuth();
   const { dispatch, setLoader } = useQuiz();
   const navigate = useNavigate();
   const [leaderData, setLeaderData] = useState([]);
