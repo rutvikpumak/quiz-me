@@ -14,6 +14,7 @@
   --text-grey: #A0AEC0;
   --font-color: var(--white);
   background-color: var(--drk-blue);
+  transition:all 0.3s;
 }
 
 .light-theme {
@@ -24,6 +25,8 @@
   --text-grey: #a6b3c4;
   --font-color: var(--black);
   background-color: var(--drk-blue);
+  transition:all 0.3s;
+
 
 }
 
