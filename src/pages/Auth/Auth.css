@@ -10,7 +10,7 @@
     padding: 1.5rem;
     gap: 1.5rem;
     color: var(--link);
-    border: 1.5px solid var(--lynxWhite);
+    border: 1.5px solid var(--font-color);
     border-radius: var(--border-md);
     background: var(--md-blue);
 }
