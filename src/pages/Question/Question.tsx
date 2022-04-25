@@ -14,6 +14,8 @@ export function Question() {
   const {
     state: { currentQue },
     dispatch,
+    setModal,
+    modal,
   } = useQuiz();
 
   const optionClickHandler = (option: Option): void => {
@@ -31,8 +33,7 @@ export function Question() {
     setSelectedOption("");
   };
   const quitHandler = () => {
-    sessionStorage.removeItem("quizId");
-    navigate("/");
+    setModal(true);
   };
 
   useEffect(() => {
@@ -40,9 +41,9 @@ export function Question() {
       if (seconds > 0) {
         setSeconds(seconds - 1);
       }
-      if (seconds === 0) {
+      if (seconds === 1) {
         nextClickHandler();
-        if (currentQue === questions.length) {
+        if (currentQue === questions.length && !modal) {
           navigate("/result");
         }
       }
@@ -54,8 +55,8 @@ export function Question() {
   }, [seconds]);
 
   return (
-    <div className="quizcontainer flex-center">
-      <div className="quiz-main-container">
+    <div className="quiz-container flex-center">
+      <div className={`quiz-main-container ${modal && "pointer-none"}`}>
         <div className="quiz-pg-header">
           <p className="paragraph-rg">
             Question: {currentQue}/{questions?.length}

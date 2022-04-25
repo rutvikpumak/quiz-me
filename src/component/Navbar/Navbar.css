@@ -9,22 +9,20 @@
 
 .profile-icon {
     margin-left: 0.1rem;
-    background-color: var(--lt-drk-blue);
-    border-radius: 50%;
-    padding: 0.4rem 0.6rem;
+    color: var(--link);
     cursor: pointer;
+    font-size: 1.8rem;
 }
 
 .nav-title {
     color: var(--link);
 }
 
-.navbar-right h5{
+.navbar-right h5 {
     font-size: 1.1rem;
     cursor: pointer;
 }
 
-.navbar-right h5:hover{
-   color:var(--link);
-   border-bottom:1px solid var(--link)
+.navbar-right h5:hover {
+    color: var(--link);
 }

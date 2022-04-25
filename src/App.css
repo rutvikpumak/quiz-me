@@ -30,3 +30,10 @@ a {
   color: inherit;
   text-decoration: inherit;
 }
+
+
+@media screen and (max-width:550px) {
+  .App {
+    width: 95%;
+  }
+}

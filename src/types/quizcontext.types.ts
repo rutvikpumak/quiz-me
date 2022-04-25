@@ -20,4 +20,6 @@ export type QuizContextType = {
     dispatch: Dispatch,
     loader: boolean;
     setLoader: (value: boolean) => void;
+    modal: boolean;
+    setModal: (value: boolean) => void;
 }

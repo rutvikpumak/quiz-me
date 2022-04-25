@@ -24,7 +24,7 @@ export function Navbar() {
           </Link>
         </div>
         <i
-          className="fa fa-user profile-icon"
+          className="fa fa-user-circle profile-icon"
           aria-hidden="true"
           title="Your Account"
           onClick={userHandler}

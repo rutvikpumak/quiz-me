@@ -7,3 +7,10 @@
     z-index: 9999;
     margin-top: 4.4rem;
 }
+
+@media screen and (max-width:550px) {
+    .loader-wrapper{
+        width: 100vw;
+        margin-top: 4.188rem;
+    }
+}

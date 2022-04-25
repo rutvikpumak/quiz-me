@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { collection, db, getDocs } from "../../firebase";
 
 export function Dashboard() {
-  const { userInfo } = useAuth();
+  const { userInfo, token } = useAuth();
   const { dispatch, setLoader } = useQuiz();
   const navigate = useNavigate();
   const [leaderData, setLeaderData] = useState([]);
@@ -71,7 +71,9 @@ export function Dashboard() {
         )}
       </div>
       <div className="dash">
-        <h2 className="dash-title">Quiz Leaderboard</h2>
+        <h2 className="dash-title">
+          <i className="fa fa-trophy" aria-hidden="true"></i> Leaderboard
+        </h2>
         <div className="score-container">
           <div className="score-header">
             <h3>Username</h3>

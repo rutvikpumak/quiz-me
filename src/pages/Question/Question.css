@@ -53,12 +53,21 @@
     color:#ff2f2f
 }
 
+.pointer-none{
+    pointer-events: none;
+}
+@media screen and (max-width:850px) {
+    .quiz-main-container {
+        width: 90%;
+    }
+}
 @media screen and (max-width:550px) {
 
     .quiz-main-container {
-        width: 90%;
+        width: 100%;
         font-size: 1rem;
         margin-bottom: 2rem;
+        gap:2rem
     }
 
     .quiz-pg-question h2 {

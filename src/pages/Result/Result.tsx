@@ -38,7 +38,7 @@ export function Result() {
         {(totalScore.current / (questionData.length * 10)) * 100 < 80 ? (
           <h2 className="result-msg">Oops 😭, Better Luck Next Time !</h2>
         ) : (
-          <h2 className="result-msg">Congratulations , You have cleared the quiz ! </h2>
+          <h2 className="result-msg">🎊 Congratulations , You have cleared the quiz ! 🎊 </h2>
         )}
         <div className="flex-center">
           <h3>Your Score is : </h3>

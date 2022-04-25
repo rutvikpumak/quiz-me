@@ -1,8 +1,10 @@
-.dash-container,
 .score-container {
     margin: 2rem 0;
 }
 
+.dash{
+    margin: 3rem 0 4rem 0;
+}
 .dash-title {
     color: var(--link);
     text-align: center;
