@@ -31,7 +31,8 @@
     padding: 0.5rem 1rem;
     cursor: pointer;
     background: inherit;
-    color: var(--white);
+    color:var(--font-color)
+
 }
 
 .auth-main input::placeholder {

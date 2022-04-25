@@ -23,3 +23,8 @@ export type QuizContextType = {
     modal: boolean;
     setModal: (value: boolean) => void;
 }
+
+export type ThemeContextType = {
+    theme: string | null;
+    changeTheme: () => void;
+}
