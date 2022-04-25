@@ -1,46 +1,44 @@
-# Getting Started with Create React App
+<div align="center">
+  <img src="src/assets/logo.png" height="100" width="100" alt="logo"/>
+  
+# Quiz Me
+###  A Fun Quiz Web Application
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## **How to install and run locally ?**
 
-In the project directory, you can run:
+```
+$ git clone https://github.com/rutvikpumak/quiz-me.git
+$ cd quiz-me
+$ npm install
+$ npm install firebase
+$ npm start
+```
 
-### `npm start`
+## Features ?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Home With Category
+2. Rules Page
+3. MCQ Based Question 
+4. Quiz Result 
+5. User Profile 
+6. Timer for Questions
+7. Leaderboard / Dashboard
+8. Dark Mode / Light Mode
+9. Quit Quiz
+10. Authentication
+      - User Signup
+      - User Login
+      - User Logout
+11. Full Responsive
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  
 
-### `npm test`
+## **Built with -**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React with Typescript 
+- Firebase for storing data
+- Vanilla CSS integrated with BoostMat UI Component Library
+- React Context API + useReducer
+- React Router v6
