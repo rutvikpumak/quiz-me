@@ -9,7 +9,6 @@ import { useTheme } from "./context/Theme/theme-context";
 function App() {
   const { loader, modal } = useQuiz();
   const { theme } = useTheme();
-  console.log(theme === "dark");
   return (
     <div className={`${theme === "dark" ? "default-theme" : "light-theme"}`}>
       <div className="App-container">
